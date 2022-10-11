@@ -5,18 +5,18 @@ const {ctrlWrapper} = require("../../helpers");
 const ctrl = require("../../controllers");
 const {validateBody, isValidId} = require("../../middlewares");
 
-const { schemas } = require("../../models/contacts");
+const { models } = require("../../models");
 
 contactsRouter.get('/', ctrlWrapper(ctrl.contacts.listContacts));
 
 contactsRouter.get('/:id', isValidId, ctrlWrapper(ctrl.contacts.getContactById));
 
-contactsRouter.post('/',validateBody(schemas.validateSchema), ctrlWrapper(ctrl.contacts.addContact));
+contactsRouter.post('/',validateBody(models.schemas.validateSchema), ctrlWrapper(ctrl.contacts.addContact));
 
 contactsRouter.delete('/:id', isValidId, ctrlWrapper(ctrl.contacts.removeContact));
 
-contactsRouter.put('/:id', isValidId, validateBody(schemas.validateSchema), ctrlWrapper(ctrl.contacts.updateContact));
+contactsRouter.put('/:id', isValidId, validateBody(models.schemas.validateSchema), ctrlWrapper(ctrl.contacts.updateContact));
 
-contactsRouter.patch('/:id/favorite', isValidId, validateBody(schemas.validateSchemaFavorite), ctrlWrapper(ctrl.contacts.updateContactFavorite));
+contactsRouter.patch('/:id/favorite', isValidId, validateBody(models.schemas.validateSchemaFavorite), ctrlWrapper(ctrl.contacts.updateContactFavorite));
 
 module.exports = contactsRouter;

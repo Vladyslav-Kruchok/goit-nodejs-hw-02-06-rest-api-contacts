@@ -1,9 +1,9 @@
-const { Contact } = require("../../models");
+const { models } = require("../../models");
 const { requestError } = require("../../helpers");
 
 const updateContactFavorite = async (req, res, next) => {
     const { id } = req.params;
-    const updatedContacts = await Contact.findByIdAndUpdate(id, req.body, {new: true});
+    const updatedContacts = await models.Contact.findByIdAndUpdate(id, req.body, {new: true});
     if(!updatedContacts) {
         throw requestError(404);
     };
