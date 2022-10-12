@@ -1,5 +1,7 @@
-const models = require("./contacts");
+const contactsModel = require("./contacts");
+const authModel = require("./auth");
 
 module.exports = {
-    models
+    contactsModel,
+    authModel
 }

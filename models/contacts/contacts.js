@@ -28,6 +28,7 @@ const contactSchema = new Schema({
     }
 }, { versionKey: false, timestamps: true });
 
+//to right show err from server
 contactSchema.post("save", handleSaveErrors);
 
 const validateSchema = Joi.object({

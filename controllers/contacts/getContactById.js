@@ -1,10 +1,10 @@
-const { models } = require("../../models");
+const { contactsModel } = require("../../models");
 const { requestError } = require("../../helpers");
 
 const getContactById = async (req, res, next) => {
     
     const {id} = req.params;
-    const сontactById = await models.Contact.findById(id);
+    const сontactById = await contactsModel.Contact.findById(id);
     
     if (!сontactById) {
         throw requestError(404);
