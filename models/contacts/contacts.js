@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-const { handleSaveErrors } = require("../../middlewares");
+const { handleSaveErrors } = require("../../helpers");
 
 //(542) 451-7038
 const telFormat = /^\(\d{3}\)\s\d{3}-\d{4}/;
@@ -25,6 +25,11 @@ const contactSchema = new Schema({
         type: Boolean,
         enum: bValue,
         default: false
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        required: true
     }
 }, { versionKey: false, timestamps: true });
 

@@ -1,3 +1,7 @@
+## {"email": "vd@gmail.com", "password": "123000" }, {"email": "vlad@gmail.com", "password": "123456" }
+
+## req - global object in all solution
+
 ## pass: UKWZHtAPlIVXe669
 
 ## string compass: mongodb+srv://Vladyslav:UKWZHtAPlIVXe669@cluster0.ywdv6js.mongodb.net
