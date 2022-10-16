@@ -1,9 +1,3 @@
-## pass: UKWZHtAPlIVXe669
-
-## string compass: mongodb+srv://Vladyslav:UKWZHtAPlIVXe669@cluster0.ywdv6js.mongodb.net
-
-## string app: mongodb+srv://Vladyslav:UKWZHtAPlIVXe669@cluster0.ywdv6js.mongodb.net/?retryWrites=true&w=majority
-
 ## GoIT Node.js Course Template Homework
 
 Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
