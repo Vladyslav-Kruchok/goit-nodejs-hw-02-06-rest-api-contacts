@@ -1,13 +1,3 @@
-## {"email": "vd@gmail.com", "password": "123000" }, {"email": "vlad@gmail.com", "password": "123456" }, { "email": "vd-one@gmail.com", "password": "000000" }
-
-## req - global object in all solution
-
-## pass: UKWZHtAPlIVXe669
-
-## string compass: mongodb+srv://Vladyslav:UKWZHtAPlIVXe669@cluster0.ywdv6js.mongodb.net
-
-## string app: mongodb+srv://Vladyslav:UKWZHtAPlIVXe669@cluster0.ywdv6js.mongodb.net/?retryWrites=true&w=majority
-
 ## GoIT Node.js Course Template Homework
 
 Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
