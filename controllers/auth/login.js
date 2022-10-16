@@ -8,14 +8,13 @@ const login = async (req, res) => {
     const { SECRET_KEY } = process.env;
     const { email, password } = req.body;
     const registerUser = await authModel.User.findOne({ email });
-    
     if (!registerUser) {
-        throw (requestError(401, "email not found"));
+        throw (requestError(401, "Email or password is wrong"));//"email not found" for corporate clients
     };
     
     const passwordCompare = await bcrypt.compare(password, registerUser.password);
     if (!passwordCompare) {
-        throw (requestError(401, "password is wrong"));
+        throw (requestError(401, "Email or password is wrong"));//"password is wrong" for corporate clients
     };
     
     const payload = {
@@ -23,10 +22,14 @@ const login = async (req, res) => {
     };
     //SECRET_KEY from .env, {expiresIn: "1h"} it is lifecycle of token one hour, can be more or less
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
-    await authModel.User.findByIdAndUpdate(registerUser._id, {token})
-    
+    const { subscription } = await authModel.User.findByIdAndUpdate(registerUser._id, {token})
+
     res.json({
-        token
+        token,
+        user: {
+            email,
+            subscription
+        }
     });
 };
 

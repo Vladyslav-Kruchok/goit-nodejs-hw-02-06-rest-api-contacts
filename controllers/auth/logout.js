@@ -4,9 +4,7 @@ const logout = async (req, res) => {
     const { _id } = req.user;
     await authModel.User.findByIdAndUpdate(_id, { token: "" });
 
-    res.json({
-        message: "Logout success"
-    });
+    res.status(204);
 };
 
 module.exports = logout;

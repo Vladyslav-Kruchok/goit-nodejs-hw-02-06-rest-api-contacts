@@ -16,4 +16,6 @@ authRouter.get("/current", authenticate, ctrlWrapper(ctrl.auth.getCurrent));
 
 authRouter.get("/logout", authenticate, ctrlWrapper(ctrl.auth.logout));
 
+authRouter.patch("/users", authenticate, validateBody(authModel.schemas.updateSubscriptionSchema), ctrlWrapper(ctrl.auth.updateSubscription));
+
 module.exports = authRouter;

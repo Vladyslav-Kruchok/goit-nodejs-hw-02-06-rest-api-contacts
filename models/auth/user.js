@@ -3,10 +3,6 @@ const Joi = require("joi");
 const { handleSaveErrors } = require("../../helpers");
 
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true,
@@ -17,6 +13,11 @@ const userSchema = new Schema({
         required: true,
         minlength: 6
     },
+    subscription: {
+        type: String,
+        enum: ["starter", "pro", "business"],
+        default: "starter"
+    },
     token: {
         type: String,
         default: ""
@@ -26,7 +27,6 @@ const userSchema = new Schema({
 userSchema.post("save", handleSaveErrors);
 
 const registerSchema = Joi.object({
-    name: Joi.string().required(),
     email: Joi.string().required(),
     password: Joi.string().min(6).required()
 });
@@ -36,9 +36,15 @@ const loginSchema = Joi.object({
     password: Joi.string().min(6).required()
 });
 
+const updateSubscriptionSchema = Joi.object({
+    subscription: Joi.string().required(),
+});
+
+
 const schemas = {
     registerSchema,
-    loginSchema
+    loginSchema,
+    updateSubscriptionSchema
 };
 
 const User = model("user", userSchema);
