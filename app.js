@@ -3,7 +3,6 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const { contactsRouter, authRouter } = require("./routes/api");
-//const authRouter = require("./routes/api/auth");
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -14,6 +13,8 @@ dotenv.config();
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+//to get static file from dir "public"
+app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/contacts", contactsRouter);

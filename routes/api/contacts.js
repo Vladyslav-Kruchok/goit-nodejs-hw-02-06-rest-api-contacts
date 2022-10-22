@@ -3,7 +3,7 @@ const contactsRouter = express.Router();
 const ctrl = require("../../controllers");
 
 const {ctrlWrapper} = require("../../helpers");
-const {validateBody, isValidId, authenticate} = require("../../middlewares");
+const { validateBody, isValidId, authenticate } = require("../../middlewares");
 
 const { contactsModel } = require("../../models");
 
