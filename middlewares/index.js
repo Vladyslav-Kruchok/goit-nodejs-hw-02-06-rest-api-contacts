@@ -7,5 +7,5 @@ module.exports = {
     validateBody,
     isValidId,
     authenticate,
-    multerUpload
+    multerUpload,
 };
