@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const { handleSaveErrors } = require("../../helpers");
 
+//Model of DB
 const userSchema = new Schema({
     email: {
         type: String,
@@ -25,14 +26,27 @@ const userSchema = new Schema({
     avatarURL: {
         type: String,
         required: true
+    },
+    verify: {
+        type: Boolean,
+        default: false
+    },
+    verificationToken: {
+        type: String,
+        default: ""
     }
 }, { versionKey: false, timestamps: true });
 
 userSchema.post("save", handleSaveErrors);
 
+// Joi is check of request's  body
 const registerSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().min(6).required()
+});
+
+const verifyEmailSchema = Joi.object({
+    email: Joi.string().required(),
 });
 
 const loginSchema = Joi.object({
@@ -48,7 +62,8 @@ const updateSubscriptionSchema = Joi.object({
 const schemas = {
     registerSchema,
     loginSchema,
-    updateSubscriptionSchema
+    updateSubscriptionSchema,
+    verifyEmailSchema
 };
 
 const User = model("user", userSchema);

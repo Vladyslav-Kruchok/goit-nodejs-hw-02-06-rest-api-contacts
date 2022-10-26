@@ -1,10 +1,12 @@
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
+const { nanoid } = require("nanoid");
+
 
 const { authModel } = require("../../models");
-const { requestError } = require("../../helpers");
+const { requestError, sendEmail, createVerifyEmail } = require("../../helpers");
 
-const register = async (req, res) => { 
+const register = async (req, res) => {
     const { email, password } = req.body;
     const userDb = await authModel.User.findOne({ email });
     if (userDb) {
@@ -14,12 +16,18 @@ const register = async (req, res) => {
     const hashPass = await bcrypt.hash(password, 10);
     //create random avatar by npm gravatar
     const avatarURL = gravatar.url(email);
-    const registerUser = await authModel.User.create({ email, password: hashPass, avatarURL });
-    
+    //verification email
+    const verificationToken = nanoid();
+    const registerUser = await authModel.User.create({ email, password: hashPass, avatarURL, verificationToken });
+    const mail = createVerifyEmail(email, verificationToken);
+    const result = await sendEmail(mail);
+    console.log(result);
+
     res.status(201).json({
         user: {
             email: registerUser.email,
-            subscription: registerUser.subscription
+            subscription: registerUser.subscription,
+            verificationToken: registerUser.verificationToken
         }
     });
 };

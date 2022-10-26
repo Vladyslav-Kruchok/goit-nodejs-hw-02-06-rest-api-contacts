@@ -8,6 +8,8 @@ const { validateBody, authenticate, multerUpload } = require("../../middlewares"
 const { authModel } = require("../../models");
 //signup
 authRouter.post("/register", validateBody(authModel.schemas.registerSchema), ctrlWrapper(ctrl.auth.register));
+authRouter.get("/verify/:verificationToken", ctrlWrapper(ctrl.auth.verify));
+authRouter.post("/verify", validateBody(authModel.schemas.verifyEmailSchema), ctrlWrapper(ctrl.auth.resendVerifyEmail));
 
 //signin
 authRouter.post("/login", validateBody(authModel.schemas.loginSchema), ctrlWrapper(ctrl.auth.login));
