@@ -12,16 +12,15 @@ const register = async (req, res) => {
     if (userDb) {
         throw (requestError(409, "email in use"));
     };
-    //10 - level of a random data that add into hash of Password. can be more or less
+    // 10 - level of a random data that add into hash of Password. can be more or less
     const hashPass = await bcrypt.hash(password, 10);
-    //create random avatar by npm gravatar
+    // create random avatar by npm gravatar
     const avatarURL = gravatar.url(email);
-    //verification email
+    // verification email
     const verificationToken = nanoid();
     const registerUser = await authModel.User.create({ email, password: hashPass, avatarURL, verificationToken });
     const mail = createVerifyEmail(email, verificationToken);
-    const result = await sendEmail(mail);
-    console.log(result);
+    await sendEmail(mail);
 
     res.status(201).json({
         user: {
